@@ -4,11 +4,11 @@ type users struct {
 	Id       int    `gorm:"column:id;AUTO_INCREMENT"`
 	Username string `json:"username"`
 	Password string `json:"password"`
-	Money    string `json:"money"`
+	Money    int    `json:"money"`
 	Address  string `json:"address"`
 }
 
-type cloths struct {
+type Cloths struct {
 	Id        int    `gorm:"column:id;AUTO_INCREMENT"`
 	Price     int    `json:"price"`
 	BrandName string `json:"brand_name"`

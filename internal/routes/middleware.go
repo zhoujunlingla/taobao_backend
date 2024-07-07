@@ -28,13 +28,16 @@ func cors() gin.HandlerFunc {
 func CheckId() gin.HandlerFunc {
 	return func(context *gin.Context) {
 		id := context.Request.URL.Query().Get("id")
+		id1 := context.Request.URL.Query().Get("id1")
 		if id == "" {
 			context.JSON(200, utils.SendResult(400, "参数错误: id", nil))
 			context.Abort()
 			return
 		}
 		idInt, _ := strconv.Atoi(id)
+		idInt1, _ := strconv.Atoi(id1)
 		context.Set("Id", idInt)
+		context.Set("Id1", idInt1)
 		context.Next()
 	}
 }

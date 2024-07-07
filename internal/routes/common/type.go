@@ -8,3 +8,7 @@ type loginForm struct {
 type tokenRes struct {
 	Token string `json:"token"`
 }
+
+type buyForm struct {
+	Number int `form:"number"`
+}

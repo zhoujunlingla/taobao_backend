@@ -23,9 +23,12 @@ func InitRouter() {
 		c.JSON(200, utils.SendResult(200, fmt.Sprintf("service is runing @%s", utils.Version), nil))
 	})
 	router.Use(CheckId())
+	router.POST("/register", common.Register)
 	router.POST("/login", common.Login)
-	router.Use(CheckToken())
 
+	//router.Use(CheckToken())
+	router.POST("/show", common.Show)
+	router.POST("/buy", common.Buy)
 	router.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusOK, utils.SendResult(404, "Not Found", nil))
 	})

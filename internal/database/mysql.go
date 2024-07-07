@@ -40,5 +40,5 @@ func InitMysql() {
 	instance = db.Debug()
 
 	_ = instance.AutoMigrate(users{})
-	_ = instance.AutoMigrate(cloths{})
+	_ = instance.AutoMigrate(Cloths{})
 }
