@@ -1,8 +1,8 @@
 package common
 
 type loginForm struct {
-	User string `form:"username"`
-	Pass string `form:"password"`
+	User string `json:"username"`
+	Pass string `json:"password"`
 }
 
 type tokenRes struct {
@@ -10,5 +10,9 @@ type tokenRes struct {
 }
 
 type buyForm struct {
-	Number int `form:"number"`
+	Number int `json:"number"`
+}
+
+type SpendForm struct {
+	Money int `json:"money"`
 }

@@ -6,6 +6,8 @@ type users struct {
 	Password string `json:"password"`
 	Money    int    `json:"money"`
 	Address  string `json:"address"`
+	ImageUrl string `json:"image_url"`
+	Time     string `json:"time"`
 }
 
 type Cloths struct {

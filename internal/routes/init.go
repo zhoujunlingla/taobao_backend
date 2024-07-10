@@ -27,8 +27,10 @@ func InitRouter() {
 	router.POST("/login", common.Login)
 
 	//router.Use(CheckToken())
-	router.POST("/show", common.Show)
+	router.POST("/ClothShow", common.ClothShow)
+	router.POST("/UserShow", common.UserShow)
 	router.POST("/buy", common.Buy)
+	router.POST("/spend", common.Spend)
 	router.NoRoute(func(c *gin.Context) {
 		c.JSON(http.StatusOK, utils.SendResult(404, "Not Found", nil))
 	})

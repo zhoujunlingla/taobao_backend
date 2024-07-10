@@ -1,7 +1,9 @@
 package database
 
 import (
+	"strings"
 	"taobao_backend/internal/utils"
+	"time"
 )
 
 func checkPassWord(id int, username string, password string) (int, string) {
@@ -35,6 +37,18 @@ func Register(id int, username string, password string) (int, string) {
 		return -1, "注册失败"
 	}
 	return 0, "注册成功"
+}
+
+func ShowUser(id int) users {
+	var user users
+	user.Time = time.Now().Format(time.RFC3339)
+	parts := strings.Split(user.Time, "T")
+	date := parts[0]
+	timePart := strings.Split(parts[1], "+")[0]
+	formattedTime := date + " " + timePart
+	user.Time = formattedTime
+	instance.Select("username", "money", "address", "image_url", "time").Where("id = ?", id).First(&user)
+	return user
 }
 
 func ShowBoy(id int) Cloths {
@@ -92,5 +106,12 @@ func SaleMoney(id int, money int) {
 	var user users
 	instance.Select("Money").Where("id = ?", id).First(&user)
 	user.Money -= money
+	instance.Model(&user).Where("id = ?", id).Update("Money", user.Money)
+}
+
+func Spend(id int, money int) {
+	var user users
+	instance.Select("Money").Where("id = ?", id).First(&user)
+	user.Money = money
 	instance.Model(&user).Where("id = ?", id).Update("Money", user.Money)
 }

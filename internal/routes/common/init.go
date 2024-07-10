@@ -54,7 +54,7 @@ func Register(c *gin.Context) {
 	c.JSON(http.StatusOK, utils.SendResult(200, msg, nil))
 }
 
-func Show(c *gin.Context) {
+func ClothShow(c *gin.Context) {
 	id := getContextId(c)
 	var cloth database.Cloths
 	if database.CheckBoy(id) {
@@ -63,6 +63,12 @@ func Show(c *gin.Context) {
 		cloth = database.ShowGirl(id)
 	}
 	c.JSON(200, utils.SendResult(200, "展示衣服成功", cloth))
+}
+
+func UserShow(c *gin.Context) {
+	id := getContextId(c)
+	user := database.ShowUser(id)
+	c.JSON(200, utils.SendResult(200, "展示用户成功", user))
 }
 
 func Buy(c *gin.Context) {
@@ -85,4 +91,16 @@ func Buy(c *gin.Context) {
 	} else {
 		c.JSON(http.StatusOK, utils.SendResult(400, "购买失败", nil))
 	}
+}
+
+func Spend(c *gin.Context) {
+	id := getContextId(c)
+	body := SpendForm{}
+	err := c.ShouldBind(&body)
+	if err != nil {
+		c.JSON(http.StatusOK, utils.SendResult(400, fmt.Sprintf("系统错误：%v", err), nil))
+		return
+	}
+	database.Spend(id, body.Money)
+	c.JSON(http.StatusOK, utils.SendResult(200, "消费成功", nil))
 }
